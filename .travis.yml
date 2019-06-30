@@ -10,8 +10,11 @@ before_install:
 - sudo swapon /swapfile
 - sudo sysctl vm.swappiness=10
 
+install:
+- docker build -t danbev/ubi8-llvm .
+
 script:
-- docker build -v ${PWD}/dist:/opt/llvm-project/dist -t danbev/ubi8-llvm .
+- docker run -v ${PWD}/dist:/opt/llvm-project/dist -t danbev/ubi8-llvm 
 
 deploy:
   provider: releases
