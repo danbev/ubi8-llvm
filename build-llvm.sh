@@ -11,5 +11,5 @@ pushd /opt/llvm-project
 mkdir build && cd build
 cmake -G "Unix Makefiles" -DLLVM_ENABLE_PROJECTS="clang;libcxx;libcxxabi" ../llvm
 make -j8 
-make dist
+make dist-zip
 popd
