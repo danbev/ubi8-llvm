@@ -14,7 +14,13 @@ install:
 - docker build -t danbev/ubi8-llvm .
 
 script:
-- docker run -v ${PWD}/dist:/opt/llvm-project/dist -t danbev/ubi8-llvm 
+- travis_wait 300 sleep infinity & docker run -v ${PWD}/dist:/opt/llvm-project/dist -t danbev/ubi8-llvm  > docker_output.txt
+after_script:
+- tail -n 100 docker_output.txt
+after_failure:
+- tail -n 100 docker_output.txt
+after_success:
+- tail -n 100 docker_output.txt
 
 deploy:
   provider: releases
